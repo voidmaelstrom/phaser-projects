@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style.css">
+		<!-- <script src="lib/Phaser.js"></script> -->
+		<script src="https://cdn.jsdelivr.net/npm/phaser@2.4.4/dist/phaser.js"></script>
+		<script src="plugin/box2d-plugin-full.js"></script>
+		<script src="lib/phaser-state-transition.min.js"></script>
+		<script src="support/isWebGLAvailable.min.js"></script>
+		<script src="support/isMobileDevice.js"></script>
+		<title>Pinball</title>
+	</head>
+	<body>
+		<div class="pleasewait" id="loading"><div class="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div></div>
+		<div id="content" oncontextmenu="return false;"></div>
+		<script src="PinballGame.js"></script>
+	</body>
+</html>
