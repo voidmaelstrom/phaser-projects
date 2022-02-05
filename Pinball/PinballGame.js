@@ -448,7 +448,7 @@ Pinball.Game.prototype = {
 					this.rightBounceLine.lineTo(this.guide4Vertices[i] * 0.10, this.guide4Vertices[i + 1] * 0.10);
 			}
 
-			// Enable BOX 2D Physics
+			// Enable Box2d Physics
 			game.physics.startSystem(Phaser.Physics.BOX2D);
 			game.physics.box2d.ptmRatio = 500;
 			game.physics.box2d.gravity.y = 5000; // LARGE GRAVITY TO MAKE SCENE FEEL SMALLER
@@ -540,7 +540,7 @@ Pinball.Game.prototype = {
 			game.physics.box2d.restitution = 2.5;
 			this.launcherFixture = this.pinballBoard.addEdge(this.launcherVertices[0], this.launcherVertices[1], this.launcherVertices[2], this.launcherVertices[3]);
 
-			// Apply BOX 2D to the ball body
+			// Apply Box2d to the ball body
 			game.physics.box2d.restitution = 0.1;
 			this.ballBody = new Phaser.Physics.Box2D.Body(this.game, null, this.ballStart[0] * this.PTM, this.ballStart[1] * this.PTM);
 			this.ballBody.setCircle(0.64 * this.PTM);
@@ -557,111 +557,111 @@ Pinball.Game.prototype = {
 
 			// Apply a callback when the ball hits the launcher
 			this.ballBody.setFixtureContactCallback(this.launcherFixture, function() {
-					// SETTING THAT THE LAUNCHER WILL BE MOVING
+					// Set the launcher as a moving piece
 					this.launcherIsMoving = true;
 
-					// SETTING THAT THE LAUNCHER WILL BE GOING UP
+					// Set launcher as moving up
 					this.launcherGoingUp = true;
 
-					// CHECKING IF THE SOUND IS ENABLED
+					// Check if sound is enabled and apply to launcher if it is
 					if (this.soundEnabled == true) {
-							// PLAYING THE LAUNCHER SOUND
+							// Apply launcher sound
 							this.audioPlayer = this.add.audio("soundLauncher");
 							this.audioPlayer.play();
 					}
 			}, this);
 
-			// ADDING THE BALL LAUNCHER CONTAINER
+			// Apply the ball container
 			this.launcherContainer = game.add.sprite(148.5, 50, "imageBlock");
 
-			// ADDING THE BALL LAUNCHER CONTAINER MASK
+			// Apply the ball launcher container mask
 			this.launcherContainerMask = game.add.graphics();
 			this.launcherContainerMask.beginFill(0xFFFFFF, 1)
 			this.launcherContainerMask.drawRect(-5, -150, 16, 82);
 			this.launcherContainer.addChild(this.launcherContainerMask);
 			this.launcherContainer.mask = this.launcherContainerMask;
 
-			// ADDING THE BALL LAUNCHER SPRITE
+			// Apply the ball launcher sprite
 			this.launcherSprite = this.add.sprite(0, -100, "imageLauncher");
 			this.launcherContainer.addChild(this.launcherSprite);
 
-			// ADDING THE BALL SPRITE
+			// Apply the ball sprite
 			this.ballSprite = this.add.sprite(0, 0, "imageBall");
 
-			// THE BALL SPRITE MUST ALWAYS FOLLOW THE BOX2D BALL BODY
+			// Ball sprite should follow the box2d ball body
 			this.ballSprite.position.x = this.ballBody.x * 0.10 - 6;
 			this.ballSprite.position.y = this.ballBody.y * 0.10 - 6;
 
-			// LOOPING ALL THE MEDIUM CIRCLES IN ORDER TO SET A CALLBACK WHEN THE BALL HITS A MEDIUM CIRCLE
+			// Loop all the medium circle bumpers in order and apply a callback as the ball hits one of them
 			for (var i = 0; i < this.mediumCirclesList.length; i++) {
-					// SETTING THE CALLBACK AND WHAT WILL HAPPEN WHEN THE BALL HITS A MEDIUM CIRCLE
+					// Set the callback and results when the ball hits a medium circle bumper
 					this.ballBody.setFixtureContactCallback(this.mediumCirclesList[i], function(a, b, c, d, e) {
-							// CHECKING IF THE SOUND IS ENABLED
+							// Check if sound is enabled
 							if (this.soundEnabled == true) {
-									// PLAYING THE HIT SOUND
+									// Apply hit sound for the bumper
 									this.audioPlayer = this.add.audio("soundHit");
 									this.audioPlayer.play();
 							}
 
-							// SHOWING THE MEDIUM CIRCLE HIT SPRITE
+							// Show the medium circle hit sprite
 							this.mediumCirclesHitList[d.circleIndex].visible = true;
 
-							// SHOWING THE MEDIUM CIRCLE GLOW SPRITE
+							// Show the medium circle glow sprite
 							this.mediumCirclesGlowList[d.circleIndex].visible = true;
 
-							// ADDING 10 POINTS TO THE SCORE
+							// Apply 10 points to the score
 							this.updateScore(this.scoreValue + 10);
 
-							// WAITING 200 MS
+							// Wait for 200 MS
 							game.time.events.add(200, function() {
-									// HIDING THE MEDIUM CIRCLE HIT SPRITE
+									// Hide away the medium circle hit sprite
 									game.state.states["Pinball.Game"].mediumCirclesHitList[d.circleIndex].visible = false;
 
-									// HIDING THE MEDIUM CIRCLE GLOW SPRITE
+									// Hide away the medium circle glow sprite
 									game.state.states["Pinball.Game"].mediumCirclesGlowList[d.circleIndex].visible = false;
 							});
 					}, this);
 			}
 
-			// LOOPING ALL THE LARGE CIRCLES IN ORDER TO SET A CALLBACK WHEN THE BALL HITS A LARGE CIRCLE
+			// Loop all the large circles in order and apply a callback as the ball hits one of them
 			for (var i = 0; i < this.largeCirclesList.length; i++) {
-					// SETTING THE CALLBACK AND WHAT WILL HAPPEN WHEN THE BALL HITS A LARGE CIRCLE
+					// Set the callback and results when the ball hits a large circle bumper
 					this.ballBody.setFixtureContactCallback(this.largeCirclesList[i], function(a, b, c, d, e) {
-							// CHECKING IF THE SOUND IS ENABLED
+							// Check if sound is enabled
 							if (this.soundEnabled == true) {
-									// PLAYING THE HIT SOUND
+									// Apply the hit sound for the bumper
 									this.audioPlayer = this.add.audio("soundHit");
 									this.audioPlayer.play();
 							}
 
-							// SHOWING THE LARGE CIRCLE HIT SPRITE
+							// Show the large circle hit sprite
 							this.largeCirclesHitList[d.circleIndex].visible = true;
 
-							// SHOWING THE LARGE CIRCLE GLOW SPRITE
+							// Show the large circle glow sprite
 							this.largeCirclesGlowList[d.circleIndex].visible = true;
 
-							// ADDING 20 POINTS TO THE SCORE
+							// Add 20 points to the score
 							this.updateScore(this.scoreValue + 20);
 
-							// WAITING 200 MS
+							// Wait for 200 MS
 							game.time.events.add(200, function() {
-									// HIDING THE LARGE CIRCLE HIT SPRITE
+									// Hide away the large circle hit sprite
 									game.state.states["Pinball.Game"].largeCirclesHitList[d.circleIndex].visible = false;
 
-									// HIDING THE LARGE CIRCLE GLOW SPRITE
+									// Hide away the large circle glow sprite
 									game.state.states["Pinball.Game"].largeCirclesGlowList[d.circleIndex].visible = false;
 							});
 					}, this);
 			}
 
-			// SETTING THE RESTITUTION FOR THE FLIPPERS
+			// Apply the restitution for the flippers
 			game.physics.box2d.restitution = 0.1;
 
-			// ADDING THE LEFT FLIPPER
+			// Apply the left flipper
 			this.leftFlipper = new Phaser.Physics.Box2D.Body(this.game, null, -8 * this.PTM, -7.99956 * this.PTM, 2);
 			this.leftFlipper.addPolygon(this.leftFlipperVertices);
 
-			// ADDING THE LEFT FLIPPER SPRITE
+			// Apply the left flipper sprite
 			this.leftFlipperSprite = game.add.graphics(0, 0);
 			this.leftFlipperSprite.beginFill(0xFFFFFF);
 			this.leftFlipperSprite.lineStyle(2, 0x343434, 1);
@@ -675,11 +675,11 @@ Pinball.Game.prototype = {
 			this.leftFlipperSprite.position.x = this.leftFlipper.x * 0.10;
 			this.leftFlipperSprite.position.y = this.leftFlipper.y * 0.10;
 
-			// ADDING THE RIGHT FLIPPER
+			// Apply the right flipper
 			this.rightFlipper = new Phaser.Physics.Box2D.Body(this.game, null, 6.4 * this.PTM, -7.99956 * this.PTM, 2);
 			this.rightFlipper.addPolygon(this.rightFlipperVertices);
 
-			// ADDING THE RIGHT FLIPPER SPRITE
+			// Apply the right flipper sprite
 			this.rightFlipperSprite = game.add.graphics(0, 0);
 			this.rightFlipperSprite.beginFill(0xFFFFFF);
 			this.rightFlipperSprite.lineStyle(2, 0x343434, 1);
@@ -693,45 +693,45 @@ Pinball.Game.prototype = {
 			this.rightFlipperSprite.position.x = this.rightFlipper.x * 0.10;
 			this.rightFlipperSprite.position.y = this.rightFlipper.y * 0.10;
 
-			// SETTING THE FLIPPER JOINTS							(BODYA, BODYB, AX, AY, BX, BY, MOTORSPEED, MOTORTORQUE, MOTORENABLED, LOWERLIMIT, UPPERLIMIT, LIMITENABLED)
+			// Apply the flipper joints (BODYA, BODYB, AX, AY, BX, BY, MOTORSPEED, MOTORTORQUE, MOTORENABLED, LOWERLIMIT, UPPERLIMIT, LIMITENABLED)
 			this.flipperJoints[0] = game.physics.box2d.revoluteJoint(this.pinballBoard, this.leftFlipper, -8 * this.PTM, -7.99956 * this.PTM, 0, 0, 2, 100, false, -25, 25, true);
 			this.flipperJoints[1] = game.physics.box2d.revoluteJoint(this.pinballBoard, this.rightFlipper, 6.4 * this.PTM, -7.99956 * this.PTM, 0, 0, 2, 100, false, -25, 25, true);
 
-			// LOWERING THE LEFT FLIPPER
+			// Lower left flipper
 			this.leftFlipper.angle = 27;
 
-			// LOWERING THE RIGHT FLIPPER
+			// Lower the right flipper
 			this.rightFlipper.angle = -27;
 
-			// ADDING THE SCORE BACKGROUND
+			// Apply the score background
 			this.scoreBackground = game.add.graphics();
 			this.scoreBackground.beginFill(0x000000, 0.7);
 			this.scoreBackground.lineStyle(2, 0x383838, 1);
 			this.scoreBackground.drawRoundedRect(-155, -540, 113.5, 40, 10);
 
-			// ADDING THE SCORE LABEL SHADOW
+			// Apply the score label shadow
 			this.scoreLabelShadow = game.add.bitmapText(-145, -531.25, "ArialBlackWhite", "0", 27);
 			this.scoreLabelShadow.height = 32;
 			this.scoreLabelShadow.tint = 0x000000;
 
-			// ADDING THE SCORE LABEL
+			// Apply the score label
 			this.scoreLabel = game.add.bitmapText(-148, -533.25, "ArialBlackWhite", "0", 27);
 			this.scoreLabel.height = 32;
 
-			// ADDING THE HIGH SCORE BACKGROUND
+			// Apply the high score background
 			this.highScoreBackground = game.add.graphics();
 			this.highScoreBackground.beginFill(0x022C5C, 1);
 			this.highScoreBackground.lineStyle(2, 0x0046A9, 1);
 			this.highScoreBackground.drawRoundedRect(30.5, -540, 129, 40, 10);
 
-			// ADDING THE HIGH SCORE ICON SHADOW
+			// Apply the high score icon shadow
 			this.highScoreIconShadow = game.add.sprite(39, -531, "imageHighScore");
 			this.highScoreIconShadow.tint = 0x000000;
 
-			// ADDING THE HIGH SCORE ICON
+			// Add the high score icon
 			this.highScoreIcon = game.add.sprite(37, -533, "imageHighScore");
 
-			// ADDING THE HIGH SCORE LABEL SHADOW
+			// Apply the high score label shadow
 			this.highScoreLabelShadow = game.add.bitmapText(69, -531.25, "ArialBlackWhite", this.getHighscore(), 27);
 			this.highScoreLabelShadow.height = 32;
 			this.highScoreLabelShadow.tint = 0x000000;
@@ -740,7 +740,7 @@ Pinball.Game.prototype = {
 			this.highScoreLabel = game.add.bitmapText(66, -533.25, "ArialBlackWhite", this.getHighscore(), 27);
 			this.highScoreLabel.height = 32;
 
-			// ADDING THE SOUND HANDLER ON BACKGROUND
+			// Add the sound handler on background
 			this.soundHandlerOnBackground = game.add.graphics();
 			this.soundHandlerOnBackground.beginFill(0x022C5C, 1);
 			this.soundHandlerOnBackground.lineStyle(2, 0x0046A9, 1);
@@ -748,22 +748,23 @@ Pinball.Game.prototype = {
 			this.soundHandlerOnBackground.inputEnabled = true;
 			this.soundHandlerOnBackground.input.useHandCursor = true;
 			this.soundHandlerOnBackground.events.onInputUp.add(function() {
-					// SHOWING THE SOUND HANDLER OFF BACKGROUND AND ICON
+				
+					// Show the sound handler off background and icon
 					this.soundHandlerOffBackground.visible = true;
 					this.soundHandlerOffSprite.visible = true;
 
-					// HIDING THE SOUND HANDLER ON BACKGROUND AND ICON
+					// Hide the sound handler on background and icon
 					this.soundHandlerOnBackground.visible = false;
 					this.soundHandlerOnSprite.visible = false;
 
-					// SETTING THAT THE SOUND IS DISABLED
+					// Set the sound to disabled
 					this.soundEnabled = false;
 			}, this);
 
-			// ADDING THE SOUND HANDLER ON SPRITE
+			// Apply the sound handler on sprite
 			this.soundHandlerOnSprite = game.add.sprite(-19, -531.25, "imageSoundOn");
 
-			// ADDING THE SOUND HANDLER OFF BACKGROUND
+			// Apply the sound handler off the background
 			this.soundHandlerOffBackground = game.add.graphics();
 			this.soundHandlerOffBackground.beginFill(0x383838, 1);
 			this.soundHandlerOffBackground.lineStyle(2, 0x707070, 1);
@@ -771,35 +772,36 @@ Pinball.Game.prototype = {
 			this.soundHandlerOffBackground.inputEnabled = true;
 			this.soundHandlerOffBackground.input.useHandCursor = true;
 			this.soundHandlerOffBackground.events.onInputUp.add(function() {
-					// SHOWING THE SOUND HANDLER ON BACKGROUND AND ICON
+
+					// Show the sound handler on background and icon
 					this.soundHandlerOnBackground.visible = true;
 					this.soundHandlerOnSprite.visible = true;
 
-					// HIDING THE SOUND HANDLER OFF BACKGROUND AND ICON
+					// Hide the sound handler off background and icon
 					this.soundHandlerOffBackground.visible = false;
 					this.soundHandlerOffSprite.visible = false;
 
-					// SETTING THAT THE SOUND IS ENABLED
+					// Set the sound to enabled
 					this.soundEnabled = true;
 			}, this);
 
-			// ADDING THE SOUND HANDLER ON SPRITE
+			// Apply the sound handler to sprite
 			this.soundHandlerOffSprite = game.add.sprite(-19, -531.25, "imageSoundOff");
 
-			// ADDING THE NORMAL BUTTON A
+			// Applying the normal A button
 			this.buttonANormal = game.add.sprite(-10, 490, "imageButtonANormal");
 			this.buttonANormal.fixedToCamera = true;
 			this.buttonANormal.tint = 0xAFAFAF;
 			this.buttonANormal.scale.set(0.8);
 
-			// ADDING THE PRESSED BUTTON A
+			// Applying the pressed A button
 			this.buttonAPressed = game.add.sprite(-10, 490, "imageButtonAPressed");
 			this.buttonAPressed.fixedToCamera = true;
 			this.buttonAPressed.tint = 0xAFAFAF;
 			this.buttonAPressed.scale.set(0.8);
 			this.buttonAPressed.visible = false;
 
-			// ADDING THE BUTTON A HANDLER
+			// Applying the A button handler
 			this.buttonAHandler = game.add.graphics();
 			this.buttonAHandler.beginFill(0x000000, 0);
 			this.buttonAHandler.drawRect(-10, 490, 120, 120, 10);
@@ -818,20 +820,20 @@ Pinball.Game.prototype = {
 					this.buttonAPressed.visible = false;
 			}, this);
 
-			// ADDING THE NORMAL BUTTON B
+			// Applying the normal B button
 			this.buttonBNormal = game.add.sprite(225, 490, "imageButtonBNormal");
 			this.buttonBNormal.fixedToCamera = true;
 			this.buttonBNormal.tint = 0xAFAFAF;
 			this.buttonBNormal.scale.set(0.8);
 
-			// ADDING THE PRESSED BUTTON B
+			// Apply the pressed B button
 			this.buttonBPressed = game.add.sprite(225, 490, "imageButtonBPressed");
 			this.buttonBPressed.fixedToCamera = true;
 			this.buttonBPressed.tint = 0xAFAFAF;
 			this.buttonBPressed.scale.set(0.8);
 			this.buttonBPressed.visible = false;
 
-			// ADDING THE BUTTON B HANDLER
+			// Apply the B button handler
 			this.buttonBHandler = game.add.graphics();
 			this.buttonBHandler.beginFill(0x000000, 0);
 			this.buttonBHandler.drawRect(225, 490, 120, 120, 10);
@@ -850,67 +852,68 @@ Pinball.Game.prototype = {
 					this.buttonBPressed.visible = false;
 			}, this);
 
-			// CHECKING IF IT IS A MOBILE DEVICE
+			// Check if running on a mobile device
 			if (this.isMobileDevice == false) {
-					// HIDING THE BUTTON A
+
+					// Hide button A
 					this.buttonANormal.visible = false;
 					this.buttonAPressed.visible = false;
 					this.buttonAHandler.visible = false;
 
-					// HIDING THE BUTTON B
+					// Hide button B
 					this.buttonBNormal.visible = false;
 					this.buttonBPressed.visible = false;
 					this.buttonBHandler.visible = false;
 			}
 
-			// GETTING THE CURSOR KEY INPUTS
+			// Get the cursor inputs
 			this.cursors = game.input.keyboard.createCursorKeys();
 
-			// REGISTERING THE 'A' AND 'D' KEYS
+			// Apply the 'A' and 'D' keys
 			this.keyA = game.input.keyboard.addKey(Phaser.Keyboard.A);
 			this.keyD = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
-			// PAUSING THE BOX2D PHYSICS
+			// Pause the box2d physics
 			game.physics.box2d.pause();
 
-			// WAITING 500 MS
+			// Wait for 500 MS
 			game.time.events.add(500, function() {
-					// RESUMING THE BOX2D PHYSICS
+					// Resume the box2d physics
 					game.physics.box2d.resume();
 			});
 	},
 
 	update: function() {
-			// CHECKING IF THE GAME IS OVER
+			// Check if the game is over
 			if (this.gameOver == true) {
-					// RESTORING THE BALL THE STARTING POSITION
+					// Restore the ball starting position (just over the launcher)
 					this.ballBody.x = this.ballStart[0] * this.PTM;
 					this.ballBody.y = this.ballStart[1] * this.PTM;
 
-					// CLEARING THE BALL VELOCITY
+					// Zero out the ball velocity
 					this.ballBody.velocity.x = 0;
 					this.ballBody.velocity.y = 0;
 					this.ballBody.angularVelocity = 0;
 
-					// SETTING THAT THE GAME IS NOT OVER
+					// Set that game over is not true
 					this.gameOver = false;
 			}
 
-			// THE BALL SPRITE MUST ALWAYS FOLLOW THE BOX2D BALL BODY
+			// Ball sprite has to follow the box2d ball body
 			this.ballSprite.position.x = this.ballBody.x * 0.10 - 6;
 			this.ballSprite.position.y = this.ballBody.y * 0.10 - 6;
 
-			// THE LEFT FLIPPER SPRITE MUST ALWAYS FOLLOW THE BOX2D LEFT FLIPPER
+			// Left flipper sprite should follow the box2d left flipper
 			this.leftFlipperSprite.angle = this.leftFlipper.angle;
 
-			// THE RIGHT FLIPPER SPRITE MUST ALWAYS FOLLOW THE BOX2D RIGHT FLIPPER
+			// Right flipper sprite should follow the box2d right flipper
 			this.rightFlipperSprite.angle = this.rightFlipper.angle;
 
-			// CHECKING IF PRESSING THE LEFT OR 'A' KEY
+			// Check if user is pressing 'left arrow' or 'A' key
 			if (this.cursors.left.isDown == true || this.keyA.isDown == true || this.buttonAHandler.isDown == true) {
-					// CHECKING IF THE SOUND IS ENABLED
+					// Check if sound is enabled
 					if (this.soundEnabled == true) {
-							// CHECKING IF THE LEFT FLIPPER IS DOWN
+							// Check if the left flipper is down
 							if (this.flipperJoints[0].m_motorSpeed != -15) {
 									// PLAYING THE FLIPPER SOUND
 									this.audioPlayer = this.add.audio("soundFlipper");
@@ -918,101 +921,101 @@ Pinball.Game.prototype = {
 							}
 					}
 
-					// ENABLING THE LEFT FLIPPER
+					// Enable the left flipper
 					this.flipperJoints[0].m_enableMotor = true;
 
-					// RAISING THE LEFT FLIPPER
+					// Raise the left flipper
 					this.flipperJoints[0].SetMotorSpeed(-15);
 			} else {
-					// CHECKING IF THE LEFT FLIPPER MUST BE LOWERING
+					// Check if the left flipper is lowering
 					if (-25 > this.leftFlipper.angle) {
-							// LOWERING THE LEFT FLIPPER
+							// Lower the left flipper
 							this.flipperJoints[0].SetMotorSpeed(15);
 					}
 			}
 
-			// CHECKING IF PRESSING THE RIGHT OR 'D' KEY
+			// Check if user is pressing 'right arrow' or 'D' key
 			if (this.cursors.right.isDown == true || this.keyD.isDown == true || this.buttonBHandler.isDown == true) {
-					// CHECKING IF THE SOUND IS ENABLED
+					// Check if sound is enabled
 					if (this.soundEnabled == true) {
-							// CHECKING IF THE RIGHT FLIPPER IS DOWN
+							// Check if the right flipper is down
 							if (this.flipperJoints[1].m_motorSpeed != 15) {
-									// PLAYING THE FLIPPER SOUND
+									// Play the flipper sound
 									this.audioPlayer = this.add.audio("soundFlipper");
 									this.audioPlayer.play();
 							}
 					}
 
-					// ENABLING THE RIGHT FLIPPER
+					// Enable the right flipper
 					this.flipperJoints[1].m_enableMotor = true;
 
-					// RAISING THE RIGHT FLIPPER
+					// Raise the right flipper
 					this.flipperJoints[1].SetMotorSpeed(15);
 			} else {
-					// CHECKING IF THE RIGHT FLIPPER MUST BE LOWERING
+					// Check if right flipper is lowering
 					if (25 < this.rightFlipper.angle) {
-							// LOWERING THE RIGHT FLIPPER
+							// Lower the right flipper
 							this.flipperJoints[1].SetMotorSpeed(-15);
 					}
 			}
 
-			// CHECKING IF THE LAUNCHER IS MOVING
+			// Check if launcher is moving
 			if (this.launcherIsMoving == true) {
-					// CHECKING IF THE LAUNCHER IS GOING UP
+					// Check if launcher is going up
 					if (this.launcherGoingUp == true) {
-							// MOVING UP THE LAUNCHER
+							// Move the launcher up
 							this.launcherSprite.position.y = this.launcherSprite.position.y - 10;
 					} else {
-							// MOVING DOWN THE LAUNCHER
+							// Move down the launcher
 							this.launcherSprite.position.y = this.launcherSprite.position.y + 10;
 					}
 
-					// CHECKING IF THE LAUNCHER HITS THE TOP LIMIT
+					// Check if launcher hits the top limit
 					if (this.launcherSprite.position.y <= -160) {
-							// SETTING THAT THE LAUNCHER WILL BE GOING DOWN
+							// Set the launcher as going down
 							this.launcherGoingUp = false;
 					}
-					// CHECKING IF THE LAUNCHER HITS THE BOTTOM LIMIT
+					// Check if the launcher hits the bottom limit
 					else if (this.launcherSprite.position.y >= -100) {
-							// SETTING THAT THE LAUNCHER WILL NOT BE MOVING ANY MORE
+							// Set that the launcher will not be moving any more
 							this.launcherIsMoving = false;
 					}
 			}
 	},
 
 	render: function() {
-			// CHECKING IF THE GAME IS RUNNING IN DEBUG MODE
+			// Check if the game is running in debug mode
 			if (Pinball.showDebug == true) {
-					// SHOWING THE DEBUG LAYOUT
+					// Show the debug layout
 					game.debug.box2dWorld();
 			}
 	},
 
 	updateScore: function(newScore) {
-			// CHECKING IF THE USER HITS THE MAXIMUM SCORE POSSIBLE
+			// Check if the user hits the maximum score possible
 			if (newScore > 9999) {
-					// UPDATING THE USER SCORE
+					// Update the user score
 					newScore = 9999;
 			}
 
-			// UPDATING THE SCORE WITH THE NEW VALUE
+			// Update the score with the new value
 			this.scoreValue = newScore;
 
-			// UPDATING THE SCORE WITH THE NEW VALUE
+			// Update the score with the new value
 			this.scoreLabel.setText(newScore);
 
-			// UPDATING THE SCORE SHADOW WITH THE NEW VALUE
+			// Update the score shadow with the new value
 			this.scoreLabelShadow.setText(newScore);
 
-			// CHECKING IF THE CURRENT SCORE HITS THE HIGH SCORE
+			// Check if the current score reaches high score
 			if (this.scoreValue > this.getHighscore()) {
-					// SETTING THE NEW HIGHSCORE
+					// Set the new score
 					this.setHighscore(this.scoreValue);
 
-					// UPDATING THE HIGHSCORE WITH THE NEW VALUE
+					// Update the high score with the new value
 					this.highScoreLabel.setText(newScore);
 
-					// UPDATING THE HIGHSCORE SHADOW WITH THE NEW VALUE
+					// Update the high score shadow with the new value
 					this.highScoreLabelShadow.setText(newScore);
 			}
 	},
@@ -1055,16 +1058,16 @@ Pinball.Game.prototype = {
 	}
 };
 
-// SETTING THE DEFAULT RENDERER MODE
+// Set the default renderer
 var rendererMode = Phaser.WEBGL;
 
-// CHECKING IF THE WEBGL RENDERER MODE IS NOT AVAILABLE
+// Check if the WebGL renderer is not available
 if (isWebGLAvailable() == false) {
-	// CHANGING THE RENDERER MODE
+	// Change the renderer
 	rendererMode = Phaser.CANVAS;
 }
 
-// CREATING THE GAME INSTANCE
+// Create the game instance
 var config = {
 	width: 335,
 	height: 600,
@@ -1074,10 +1077,10 @@ var config = {
 };
 var game = new Phaser.Game(config);
 
-// CREATING THE STATES
+// Create the game states
 game.state.add("Pinball.Preloader", Pinball.Preloader);
 game.state.add("Pinball.Splash", Pinball.Splash);
 game.state.add("Pinball.Game", Pinball.Game);
 
-// STARTING THE GAME PRELOADER
+// Start the game preloader
 game.state.start("Pinball.Preloader");
