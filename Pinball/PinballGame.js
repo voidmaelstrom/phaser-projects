@@ -46,6 +46,7 @@ Pinball.Preloader.prototype = {
 			let soundLauncher = "assets/ballLauncher.mp3";
 			let soundFlipper = "assets/flipper.mp3";
 			let soundHit = "assets/pinHit.mp3";
+			let soundHitLarge = "assets/largePinHit.mp3";
 
 			// Load images
 			this.load.image("imageBackground", imageBackground);
@@ -69,6 +70,7 @@ Pinball.Preloader.prototype = {
 			this.load.audio("soundLauncher", soundLauncher);
 			this.load.audio("soundFlipper", soundFlipper);
 			this.load.audio("soundHit", soundHit);
+			this.load.audio("soundHitLarge", soundHitLarge);
 
 			// Load the font
 			game.load.bitmapFont("ArialBlackWhite", "assets/ArialBlackWhite.png", "assets/font.xml");
@@ -630,7 +632,7 @@ Pinball.Game.prototype = {
 							// Check if sound is enabled
 							if (this.soundEnabled == true) {
 									// Apply the hit sound for the bumper
-									this.audioPlayer = this.add.audio("soundHit");
+									this.audioPlayer = this.add.audio("soundHitLarge");
 									this.audioPlayer.play();
 							}
 
