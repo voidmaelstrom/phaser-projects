@@ -47,6 +47,7 @@ Pinball.Preloader.prototype = {
 			let soundFlipper = "assets/flipper.mp3";
 			let soundHit = "assets/pinHit.mp3";
 			let soundHitLarge = "assets/largePinHit.mp3";
+			let backGroundMusic = "assets/backgroundmusic.mp3";
 
 			// Load images
 			this.load.image("imageBackground", imageBackground);
@@ -71,6 +72,7 @@ Pinball.Preloader.prototype = {
 			this.load.audio("soundFlipper", soundFlipper);
 			this.load.audio("soundHit", soundHit);
 			this.load.audio("soundHitLarge", soundHitLarge);
+			this.load.audio("backGroundMusic", backGroundMusic);
 
 			// Load the font
 			game.load.bitmapFont("ArialBlackWhite", "assets/ArialBlackWhite.png", "assets/font.xml");
@@ -312,6 +314,7 @@ Pinball.Game.prototype = {
 			this.isMobileDevice = null;
 
 			this.audioPlayer = null;
+			this.backGroundMusic = null;
 	},
 
 	create: function() {
@@ -738,7 +741,7 @@ Pinball.Game.prototype = {
 			this.highScoreLabelShadow.height = 32;
 			this.highScoreLabelShadow.tint = 0x000000;
 
-			// ADDING THE HIGH SCORE LABEL
+			// Add the high score label
 			this.highScoreLabel = game.add.bitmapText(66, -533.25, "ArialBlackWhite", this.getHighscore(), 27);
 			this.highScoreLabel.height = 32;
 
@@ -761,6 +764,13 @@ Pinball.Game.prototype = {
 
 					// Set the sound to disabled
 					this.soundEnabled = false;
+
+					// Stop background music
+					if (this.soundEnabled == false) {
+						this.backGroundMusic.stop();
+						// this.backGroundMusic.mute = true;
+					}
+
 			}, this);
 
 			// Apply the sound handler on sprite
@@ -785,6 +795,14 @@ Pinball.Game.prototype = {
 
 					// Set the sound to enabled
 					this.soundEnabled = true;
+
+					// Start background music
+					if (this.soundEnabled == true) {
+						this.backGroundMusic = this.add.audio("backGroundMusic");
+						this.backGroundMusic.loop = true;
+						this.backGroundMusic.play();
+					}
+
 			}, this);
 
 			// Apply the sound handler to sprite
@@ -917,7 +935,7 @@ Pinball.Game.prototype = {
 					if (this.soundEnabled == true) {
 							// Check if the left flipper is down
 							if (this.flipperJoints[0].m_motorSpeed != -15) {
-									// PLAYING THE FLIPPER SOUND
+									// Play the flipper sound
 									this.audioPlayer = this.add.audio("soundFlipper");
 									this.audioPlayer.play();
 							}
