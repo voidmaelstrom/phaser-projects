@@ -1,4 +1,4 @@
-var Pinball = {
+let Pinball = {
 	showDebug: false
 };
 
@@ -14,9 +14,9 @@ Pinball.Preloader.prototype = {
 			this.game.renderer.renderSession.roundPixels = true;
 
 			// Scaling the canvas size for the game
-			var scaleX = window.innerWidth / 335;
-			var scaleY = window.innerHeight / 600;
-			var scale = Math.min(scaleX, scaleY);
+			let scaleX = window.innerWidth / 335;
+			let scaleY = window.innerHeight / 600;
+			let scale = Math.min(scaleX, scaleY);
 			this.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
 			this.scale.setUserScale(scale, scale);
 			this.scale.pageAlignHorizontally = true;
@@ -99,7 +99,7 @@ Pinball.Splash.prototype = {
 
 	create: function() {
 			// Apply logo offset
-			var logoOffset = 20;
+			let logoOffset = 20;
 
 			// Apply the background color
 			this.stage.backgroundColor = "#FFFFFF";
@@ -230,9 +230,9 @@ Pinball.Game = function(game) {
 
 	// Canvas scaling to size
 	function resizeF() {
-			var scaleX = window.innerWidth / 335;
-			var scaleY = window.innerHeight / 600;
-			var scale = Math.min(scaleX, scaleY);
+			let scaleX = window.innerWidth / 335;
+			let scaleY = window.innerHeight / 600;
+			let scale = Math.min(scaleX, scaleY);
 			game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
 			game.scale.setUserScale(scale, scale);
 			game.scale.pageAlignHorizontally = true;
@@ -330,7 +330,7 @@ Pinball.Game.prototype = {
 			// Apply the pinball board background mask
 			this.pinballBoardMask = game.add.graphics(0, 0);
 			this.pinballBoardMask.beginFill(0x000000);
-			for (var i = 0; i < this.outlineVertices.length; i = i + 2) {
+			for (let i = 0; i < this.outlineVertices.length; i = i + 2) {
 					if (i == 0) {
 							this.pinballBoardMask.moveTo(this.outlineVertices[i] * 0.10 - 0.0000001, this.outlineVertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -345,7 +345,7 @@ Pinball.Game.prototype = {
 			// Apply the background pinball board background line
 			this.pinballBoardLine = game.add.graphics(0, 0);
 			this.pinballBoardLine.lineStyle(2.05, 0x343434, 1);
-			for (var i = 0; i < this.outlineVertices.length; i = i + 2) {
+			for (let i = 0; i < this.outlineVertices.length; i = i + 2) {
 					if (i == 0) {
 							this.pinballBoardLine.moveTo(this.outlineVertices[i] * 0.10 - 0.0000001, this.outlineVertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -356,7 +356,7 @@ Pinball.Game.prototype = {
 			// Create the left border mask
 			this.leftBorderMask = game.add.graphics(0, 0);
 			this.leftBorderMask.beginFill(0xFFFFFF);
-			for (var i = 0; i < this.guide1Vertices.length; i = i + 2) {
+			for (let i = 0; i < this.guide1Vertices.length; i = i + 2) {
 					if (i == 0) {
 							this.leftBorderMask.moveTo(this.guide1Vertices[i] * 0.10 - 0.0000001, this.guide1Vertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -371,7 +371,7 @@ Pinball.Game.prototype = {
 			// Apply the left border line
 			this.leftBorderLine = game.add.graphics(0, 0);
 			this.leftBorderLine.lineStyle(2, 0x343434, 1);
-			for (var i = 0; i < this.guide1Vertices.length; i = i + 2) {
+			for (let i = 0; i < this.guide1Vertices.length; i = i + 2) {
 					if (i == 0) {
 							this.leftBorderLine.moveTo(this.guide1Vertices[i] * 0.10 - 0.0000001, this.guide1Vertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -381,7 +381,7 @@ Pinball.Game.prototype = {
 			// Create the right border mask
 			this.rightBorderMask = game.add.graphics(0, 0);
 			this.rightBorderMask.beginFill(0xFFFFFF);
-			for (var i = 0; i < this.guide2Vertices.length; i = i + 2) {
+			for (let i = 0; i < this.guide2Vertices.length; i = i + 2) {
 					if (i == 0) {
 							this.rightBorderMask.moveTo(this.guide2Vertices[i] * 0.10 - 0.0000001, this.guide2Vertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -396,7 +396,7 @@ Pinball.Game.prototype = {
 			// Apply the right border line
 			this.rightBorderLine = game.add.graphics(0, 0);
 			this.rightBorderLine.lineStyle(2, 0x343434, 1);
-			for (var i = 0; i < this.guide2Vertices.length; i = i + 2) {
+			for (let i = 0; i < this.guide2Vertices.length; i = i + 2) {
 					if (i == 0) {
 							this.rightBorderLine.moveTo(this.guide2Vertices[i] * 0.10 - 0.0000001, this.guide2Vertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -406,7 +406,7 @@ Pinball.Game.prototype = {
 			// Create the left bounce mask
 			this.leftBounceMask = game.add.graphics(0, 0);
 			this.leftBounceMask.beginFill(0xFFFFFF);
-			for (var i = 0; i < this.guide3Vertices.length; i = i + 2) {
+			for (let i = 0; i < this.guide3Vertices.length; i = i + 2) {
 					if (i == 0) {
 							this.leftBounceMask.moveTo(this.guide3Vertices[i] * 0.10 - 0.0000001, this.guide3Vertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -421,7 +421,7 @@ Pinball.Game.prototype = {
 			// Apply the left bounce line
 			this.leftBounceLine = game.add.graphics(0, 0);
 			this.leftBounceLine.lineStyle(2, 0x343434, 1);
-			for (var i = 0; i < this.guide3Vertices.length; i = i + 2) {
+			for (let i = 0; i < this.guide3Vertices.length; i = i + 2) {
 					if (i == 0) {
 							this.leftBounceLine.moveTo(this.guide3Vertices[i] * 0.10 - 0.0000001, this.guide3Vertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -431,7 +431,7 @@ Pinball.Game.prototype = {
 			// Create the right bounce mask
 			this.rightBounceMask = game.add.graphics(0, 0);
 			this.rightBounceMask.beginFill(0xFFFFFF);
-			for (var i = 0; i < this.guide4Vertices.length; i = i + 2) {
+			for (let i = 0; i < this.guide4Vertices.length; i = i + 2) {
 					if (i == 0) {
 							this.rightBounceMask.moveTo(this.guide4Vertices[i] * 0.10 - 0.0000001, this.guide4Vertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -446,7 +446,7 @@ Pinball.Game.prototype = {
 			// Apply the right bounce line
 			this.rightBounceLine = game.add.graphics(0, 0);
 			this.rightBounceLine.lineStyle(2, 0x343434, 1);
-			for (var i = 0; i < this.guide4Vertices.length; i = i + 2) {
+			for (let i = 0; i < this.guide4Vertices.length; i = i + 2) {
 					if (i == 0) {
 							this.rightBounceLine.moveTo(this.guide4Vertices[i] * 0.10 - 0.0000001, this.guide4Vertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -474,21 +474,21 @@ Pinball.Game.prototype = {
 			game.physics.box2d.restitution = 1;
 
 			// Apply the small circles
-			for (var i = 0; i < this.smallCircles.length / 2; i++) {
+			for (let i = 0; i < this.smallCircles.length / 2; i++) {
 					this.pinballBoard.addCircle(0.35 * this.PTM, this.smallCircles[2 * i + 0], this.smallCircles[2 * i + 1]);
 			}
 
 			// Apply the medium circles
-			for (var i = 0; i < this.mediumCircles.length / 2; i++) {
-					var mediumCircleX = Math.floor(this.mediumCircles[2 * i + 0] * 0.10 - 11.75);
-					var mediumCircleY = Math.floor(this.mediumCircles[2 * i + 1] * 0.10 - 11.75);
+			for (let i = 0; i < this.mediumCircles.length / 2; i++) {
+					let mediumCircleX = Math.floor(this.mediumCircles[2 * i + 0] * 0.10 - 11.75);
+					let mediumCircleY = Math.floor(this.mediumCircles[2 * i + 1] * 0.10 - 11.75);
 
 					// Apply to the circles to the medium circle list
 					this.mediumCirclesList[i] = this.pinballBoard.addCircle(1 * this.PTM, this.mediumCircles[2 * i + 0], this.mediumCircles[2 * i + 1]);
 					this.mediumCirclesList[i].circleIndex = i;
 
 					// Apply the medium circle shadow
-					var tempCircleShadow = this.add.sprite(mediumCircleX + 1, mediumCircleY + 1, "imageMediumCircle");
+					let tempCircleShadow = this.add.sprite(mediumCircleX + 1, mediumCircleY + 1, "imageMediumCircle");
 					tempCircleShadow.tint = 0x343434;
 					tempCircleShadow.alpha = 0.8;
 
@@ -509,16 +509,16 @@ Pinball.Game.prototype = {
 			}
 
 			// Apply the large circles
-			for (var i = 0; i < this.largeCircles.length / 2; i++) {
-					var largeCircleX = Math.floor(this.largeCircles[2 * i + 0] * 0.10 - 26.45);
-					var largeCircleY = Math.floor(this.largeCircles[2 * i + 1] * 0.10 - 26.45);
+			for (let i = 0; i < this.largeCircles.length / 2; i++) {
+					let largeCircleX = Math.floor(this.largeCircles[2 * i + 0] * 0.10 - 26.45);
+					let largeCircleY = Math.floor(this.largeCircles[2 * i + 1] * 0.10 - 26.45);
 
 					// Apply the circle to the large circle list
 					this.largeCirclesList[i] = this.pinballBoard.addCircle(2.8 * this.PTM, this.largeCircles[2 * i + 0], this.largeCircles[2 * i + 1]);
 					this.largeCirclesList[i].circleIndex = i;
 
 					// Apply the large circle shadow
-					var tempCircleShadow = this.add.sprite(largeCircleX + 1, largeCircleY + 1, "imageLargeCircle");
+					let tempCircleShadow = this.add.sprite(largeCircleX + 1, largeCircleY + 1, "imageLargeCircle");
 					tempCircleShadow.tint = 0x343434;
 
 					// Apply the large circle hit sprite
@@ -598,7 +598,7 @@ Pinball.Game.prototype = {
 			this.ballSprite.position.y = this.ballBody.y * 0.10 - 6;
 
 			// Loop all the medium circle bumpers in order and apply a callback as the ball hits one of them
-			for (var i = 0; i < this.mediumCirclesList.length; i++) {
+			for (let i = 0; i < this.mediumCirclesList.length; i++) {
 					// Set the callback and results when the ball hits a medium circle bumper
 					this.ballBody.setFixtureContactCallback(this.mediumCirclesList[i], function(a, b, c, d, e) {
 							// Check if sound is enabled
@@ -629,7 +629,7 @@ Pinball.Game.prototype = {
 			}
 
 			// Loop all the large circles in order and apply a callback as the ball hits one of them
-			for (var i = 0; i < this.largeCirclesList.length; i++) {
+			for (let i = 0; i < this.largeCirclesList.length; i++) {
 					// Set the callback and results when the ball hits a large circle bumper
 					this.ballBody.setFixtureContactCallback(this.largeCirclesList[i], function(a, b, c, d, e) {
 							// Check if sound is enabled
@@ -670,7 +670,7 @@ Pinball.Game.prototype = {
 			this.leftFlipperSprite = game.add.graphics(0, 0);
 			this.leftFlipperSprite.beginFill(0xFFFFFF);
 			this.leftFlipperSprite.lineStyle(2, 0x343434, 1);
-			for (var i = 0; i < this.leftFlipperVertices.length; i = i + 2) {
+			for (let i = 0; i < this.leftFlipperVertices.length; i = i + 2) {
 					if (i == 0) {
 							this.leftFlipperSprite.moveTo(this.leftFlipperVertices[i] * 0.10 - 0.0000001, this.leftFlipperVertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -688,7 +688,7 @@ Pinball.Game.prototype = {
 			this.rightFlipperSprite = game.add.graphics(0, 0);
 			this.rightFlipperSprite.beginFill(0xFFFFFF);
 			this.rightFlipperSprite.lineStyle(2, 0x343434, 1);
-			for (var i = 0; i < this.rightFlipperVertices.length; i = i + 2) {
+			for (let i = 0; i < this.rightFlipperVertices.length; i = i + 2) {
 					if (i == 0) {
 							this.rightFlipperSprite.moveTo(this.rightFlipperVertices[i] * 0.10 - 0.0000001, this.rightFlipperVertices[i + 1] * 0.10 - 0.0000001);
 					}
@@ -1042,12 +1042,12 @@ Pinball.Game.prototype = {
 
 	getHighscore: function() {
 			try {
-					var name = "highscorepinball";
-					var nameEQ = name + "=";
-					var ca = document.cookie.split(";");
+					let name = "highscorepinball";
+					let nameEQ = name + "=";
+					let ca = document.cookie.split(";");
 
-					for (var i = 0; i < ca.length; i++) {
-							var c = ca[i];
+					for (let i = 0; i < ca.length; i++) {
+							let c = ca[i];
 							while (c.charAt(0) == " ") {
 									c = c.substring(1, c.length);
 							}
@@ -1060,12 +1060,12 @@ Pinball.Game.prototype = {
 
 	setHighscore: function(newHighscore) {
 			try {
-					var name = "highscorepinball";
-					var value = newHighscore;
-					var days = 999;
-					var expires = "";
+					let name = "highscorepinball";
+					let value = newHighscore;
+					let days = 999;
+					let expires = "";
 					if (days) {
-							var date = new Date();
+							let date = new Date();
 							date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 							expires = "; expires=" + date.toUTCString();
 					}
@@ -1079,7 +1079,7 @@ Pinball.Game.prototype = {
 };
 
 // Set the default renderer
-var rendererMode = Phaser.WEBGL;
+let rendererMode = Phaser.WEBGL;
 
 // Check if the WebGL renderer is not available
 if (isWebGLAvailable() == false) {
@@ -1088,14 +1088,14 @@ if (isWebGLAvailable() == false) {
 }
 
 // Create the game instance
-var config = {
+let config = {
 	width: 335,
 	height: 600,
 	renderer: rendererMode,
 	parent: "content",
 	disableVisibilityChange: false
 };
-var game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
 
 // Create the game states
 game.state.add("Pinball.Preloader", Pinball.Preloader);
