@@ -32,6 +32,7 @@ Pinball.Preloader.prototype = {
 	},
 
 	preload: function() {
+			// set local variables for image files
 			let imageBackground = "assets/imagebackground.png";
 			let imageBoard = "assets/imageboard.png";
 			let imageBall = "/assets/ball.png";
@@ -49,14 +50,14 @@ Pinball.Preloader.prototype = {
 			let imageLogoPart1 = "assets/imagelogopart1.png";
 			let imageLogoPart2 = "assets/imagelogopart2.png";
 
-			// Load sounds
+			// set local variables for sound files
 			let soundLauncher = "assets/ballLauncher.mp3";
 			let soundFlipper = "assets/flipper.mp3";
 			let soundHit = "assets/pinHit.mp3";
 			let soundHitLarge = "assets/largePinHit.mp3";
 			let backGroundMusic = "assets/backgroundmusic.mp3";
 
-			// Load images
+			// Load the images
 			this.load.image("imageBackground", imageBackground);
 			this.load.image("imageBoard", imageBoard);
 			this.load.image("imageBall", imageBall);
