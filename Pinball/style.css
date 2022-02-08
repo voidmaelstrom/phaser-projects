@@ -17,6 +17,7 @@ body {
 	z-index: 99
 }
 
+/* Setup for initial animation of splash page prior to loading pinball table */
 .pleasewait {
 	position: fixed;
 	width: 64px;

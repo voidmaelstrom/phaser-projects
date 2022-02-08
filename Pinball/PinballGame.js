@@ -1,3 +1,10 @@
+// Set divs for beginning animation of splash screen components (div:nth-child entries in style.css)
+let divider = document.createElement("div");
+
+for (let i = 0; i < 12; i++) {
+  document.getElementsByClassName("lds-spinner").appendChild(divider);
+}
+
 let Pinball = {
 	showDebug: false
 };
