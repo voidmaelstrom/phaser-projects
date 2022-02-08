@@ -33,29 +33,29 @@ Pinball.Preloader.prototype = {
 
 	preload: function() {
 			// set local variables for image files
-			let imageBackground = "assets/imagebackground.png";
-			let imageBoard = "assets/imageboard.png";
-			let imageBall = "/assets/ball.png";
-			let imageLargeCircle = "/assets/imagelargecircle.png";
-			let imageMediumCircle = "/assets/imagemediumcircle.png";
-			let imageLauncher = "/assets/imagelauncher.png";
-			let imageHighScore = "/assets/imagehighscore.png";
-			let imageSoundOn = "assets/imagesoundon.png";
-			let imageSoundOff = "assets/imagesoundoff.png";
-			let imageButtonANormal = "assets/imagebuttonANormal.png";
-			let imageButtonAPressed = "assets/imagebuttonAPressed.png";
-			let imageButtonBNormal = "assets/imagebuttonBNormal.png";
-			let imageButtonBPressed = "assets/imagebuttonBPressed.png";
-			let imageBlock = "assets/imageblock.png";
-			let imageLogoPart1 = "assets/imagelogopart1.png";
-			let imageLogoPart2 = "assets/imagelogopart2.png";
+			let imageBackground = "./assets/imagebackground.png";
+			let imageBoard = "./assets/imageboard.png";
+			let imageBall = "./assets/ball.png";
+			let imageLargeCircle = "./assets/imagelargecircle.png";
+			let imageMediumCircle = "./assets/imagemediumcircle.png";
+			let imageLauncher = "./assets/imagelauncher.png";
+			let imageHighScore = "./assets/imagehighscore.png";
+			let imageSoundOn = "./assets/imagesoundon.png";
+			let imageSoundOff = "./assets/imagesoundoff.png";
+			let imageButtonANormal = "./assets/imagebuttonANormal.png";
+			let imageButtonAPressed = "./assets/imagebuttonAPressed.png";
+			let imageButtonBNormal = "./assets/imagebuttonBNormal.png";
+			let imageButtonBPressed = "./assets/imagebuttonBPressed.png";
+			let imageBlock = "./assets/imageblock.png";
+			let imageLogoPart1 = "./assets/imagelogopart1.png";
+			let imageLogoPart2 = "./assets/imagelogopart2.png";
 
 			// set local variables for sound files
-			let soundLauncher = "assets/ballLauncher.mp3";
-			let soundFlipper = "assets/flipper.mp3";
-			let soundHit = "assets/pinHit.mp3";
-			let soundHitLarge = "assets/largePinHit.mp3";
-			let backGroundMusic = "assets/backgroundmusic.mp3";
+			let soundLauncher = "./assets/ballLauncher.mp3";
+			let soundFlipper = "./assets/flipper.mp3";
+			let soundHit = "./assets/pinHit.mp3";
+			let soundHitLarge = "./assets/largePinHit.mp3";
+			let backGroundMusic = "./assets/backgroundmusic.mp3";
 
 			// Load the images
 			this.load.image("imageBackground", imageBackground);
@@ -83,7 +83,7 @@ Pinball.Preloader.prototype = {
 			this.load.audio("backGroundMusic", backGroundMusic);
 
 			// Load the font
-			game.load.bitmapFont("ArialBlackWhite", "assets/ArialBlackWhite.png", "assets/font.xml");
+			game.load.bitmapFont("ArialBlackWhite", "./assets/ArialBlackWhite.png", "./assets/font.xml");
 	},
 
 	create: function() {
