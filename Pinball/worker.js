@@ -1,11 +1,11 @@
 const filesToCache = [
-	"Pinball.htm",
+	"app.htm",
 	"Pinball.json",
 	"assets/PinballFavIcon_16x16.png",
 	"assets/PinballFavIcon_192x192.png",
 	"assets/PinballFavIcon_512x512.png",
-	"PinballGame.html",
-	"PinballGame.js",
+	"index.html",
+	"app.js",
 	"PinballShare.png"
 ];
 

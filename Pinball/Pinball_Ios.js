@@ -27,7 +27,7 @@ window.addEventListener("load", function()
       }, 250);
 
     // Load the game
-    document.getElementById("content").src = "PinballGame.html";
+    document.getElementById("content").src = "index.html";
 
     // Show the iframe
     document.getElementById("content").style.display = "block";

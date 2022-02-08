@@ -2,7 +2,7 @@
 	"name": "Pinball",
 	"short_name": "Pinball",
 	"lang": "en-US",
-	"start_url": "assets/Pinball.htm",
+	"start_url": "assets/app.htm",
 	"display": "standalone",
 	"orientation": "portrait",
 	"theme_color": "#000000",
