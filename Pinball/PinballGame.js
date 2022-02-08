@@ -2,7 +2,7 @@
 let divider = document.createElement("div");
 
 for (let i = 0; i < 12; i++) {
-  document.getElementsByClassName("lds-spinner").appendChild(divider);
+	document.getElementById('spinner').appendChild(divider)
 }
 
 let Pinball = {
