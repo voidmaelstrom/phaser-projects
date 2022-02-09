@@ -36,7 +36,7 @@ https://liquidmindmusic.com/mp3/download.html
     A or <- = Left Flipper
     D or -> = Right Flipper
 
-### Sounds:
+#### Sounds:
     Click the 'music note' icon on the top to turn sound on and off
 
 ### Point Values:
