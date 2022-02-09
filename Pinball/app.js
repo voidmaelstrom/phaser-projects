@@ -622,7 +622,7 @@ Pinball.Game.prototype = {
 							// Show the medium circle glow sprite
 							this.mediumCirclesGlowList[d.circleIndex].visible = true;
 
-							// Apply 10 points to the score
+							// Apply 20 points to the score
 							this.updateScore(this.scoreValue + 10);
 
 							// Wait for 200 MS
@@ -653,7 +653,7 @@ Pinball.Game.prototype = {
 							// Show the large circle glow sprite
 							this.largeCirclesGlowList[d.circleIndex].visible = true;
 
-							// Add 20 points to the score
+							// Add 40 points to the score
 							this.updateScore(this.scoreValue + 20);
 
 							// Wait for 200 MS
