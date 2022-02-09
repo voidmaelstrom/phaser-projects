@@ -39,5 +39,9 @@ https://liquidmindmusic.com/mp3/download.html
 ### Sounds:
     Click the 'music note' icon on the top to turn sound on and off
 
+### Point Values:
+    Big bumpers are worth 40 pts.
+    Small bumpers are worth 20 pts.
+
 #### Check out the game here:
 https://voidmaelstrom.github.io/phaser-projects/Pinball/index.html
