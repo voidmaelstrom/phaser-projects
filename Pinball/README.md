@@ -21,7 +21,7 @@ The final result is what you see here with the pinball game I chose using assets
 
 ### Images:
 https://opengameart.org/content/2d-pinball-sprites
-https://www.pngitem.com/middle/mTxooJ_ilmenskie-cave-large-rock-1-clip-arts-hd
+https://www.pngitem.com/middle/mTxooJ_ilmenskie-cave-large-rock-1-clip-arts-hd/
 https://clipartpng.com/?2712,waterfall-png-clip-art-image
 ### Sounds:
 https://www.vpforums.org/Tutorials/Sounds/SndLib1.html
