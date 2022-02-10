@@ -48,6 +48,7 @@ Pinball.Preloader.prototype = {
 			let imageButtonBPressed = "./assets/imagebuttonBPressed.png";
 			let imageBlock = "./assets/imageblock.png";
 			let imageLogoPart1 = "./assets/imagelogopart1.png";
+			let imageLogoMobilePart1 = "./assets/imagelogomobilepart1.png";
 			let imageLogoPart2 = "./assets/imagelogopart2.png";
 
 			// set local variables for sound files
@@ -72,6 +73,7 @@ Pinball.Preloader.prototype = {
 			this.load.image("imageButtonBNormal", imageButtonBNormal);
 			this.load.image("imageButtonBPressed", imageButtonBPressed);
 			this.load.image("imageBlock", imageBlock);
+			this.load.image('imageLogoMobilePart1', imageLogoMobilePart1);
 			this.load.image("imageLogoPart1", imageLogoPart1);
 			this.load.image("imageLogoPart2", imageLogoPart2);
 
@@ -99,20 +101,32 @@ Pinball.Splash.prototype = {
 	init: function() {},
 
 	preload: function() {
+			this.imageLogoMobilePart1 = null;
 			this.imageLogoPart1 = null;
 			this.imageLogoPart1Handler = null;
 			this.imageLogoPart2 = null;
 			this.imageLogoPart2Handler = null;
+			this.isMobileDevice = null;
 	},
 
 	create: function() {
+			// See if this game is running on a mobile device
+			this.isMobileDevice = isMobileDevice();
+
 			// Apply logo offset
 			let logoOffset = 20;
 
 			// Apply the background color
 			this.stage.backgroundColor = "#FFFFFF";
 
-			this.imageLogoPart1 = game.add.sprite(0, 0, "imageLogoPart1");
+			// If loading from a mobile device, display the proper instructions else display the default
+			if(this.isMobileDevice == true) {
+				this.imageLogoPart1 = this.imageLogoMobilePart1;
+				this.imageLogoPart1 = game.add.sprite(0, 0, "imageLogoMobilePart1");
+			} else {
+				this.imageLogoPart1 = game.add.sprite(0, 0, "imageLogoPart1");
+			}
+
 			this.imageLogoPart1.scale.x = 0.7;
 			this.imageLogoPart1.scale.y = 0.7;
 			this.imageLogoPart1.position.x = game.width / 2 - this.imageLogoPart1.width / 2;
